@@ -1,0 +1,8 @@
+<h1>강의 안내<h1>
+    <form action = "{% url 'supporter:lecCheck' user_id lect.pk %}" method = 'post'>
+        {% csrf_token %}
+        강의 이름 : {{ lect.lec_name}}<br>
+        강의 내용 : {{ lect.lec_info}}<br>
+        강의 교수 : {{ lect.lec_prof}}<br>
+        <input type='submit' value='수강신청' /> 
+<a href = "{% url 'supporter:leclist' user_id %}">뒤로</a>

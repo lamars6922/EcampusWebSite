@@ -1,0 +1,15 @@
+<h1>강의수정</h1>
+<form action = "{% url 'supporter:LecInfo' user.pk lect.pk %}" method = 'post'>
+    {% csrf_token %}
+    강의교수 : {{ lect.lec_prof }}<br>
+
+    {% for fo in form %}
+        {% if fo.label %}
+            <br>{{fo.label|safe}}
+        {% endif %}
+        {{ fo }}
+    {{ fo.help_text|safe }}
+{% endfor %}
+
+<br><input type='submit' value='변경완료' />
+</form>

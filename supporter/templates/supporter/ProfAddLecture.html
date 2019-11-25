@@ -1,0 +1,16 @@
+<h1>강의 추가</h1><hr>
+<form action = "{% url 'supporter:ProfUser' user.pk %}" method = 'post'>
+    {% csrf_token %}
+    {% for fo in form %}
+        {% if fo.label %}
+            <br>{{fo.label|safe}}
+        {% endif %}
+        {{ fo }}
+        {{ fo.help_text|safe }}
+    {% endfor %}
+    <br><br><input type='submit' value='개설 완료' />
+</form>
+<form action = "{% url 'supporter:ProfUser' user.pk %}" method = 'get'>
+    {% csrf_token %}
+<input type='submit' value='취소' />
+</form>

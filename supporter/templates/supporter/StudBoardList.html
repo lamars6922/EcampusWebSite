@@ -1,0 +1,9 @@
+{% extends "supporter/LectureStud.html" %}
+
+{% block content %}
+    {% for boa in boardList %}
+        <li><a href = "{% url 'supporter:BoardInfoStud' user.pk lect.pk boa.pk %}" method = 'get'>{{boa.board_tittle}}</a></li>    
+    {% endfor %}    
+    <a href = "{% url 'supporter:StudLecInfo' user.pk lect.pk %}" method = 'get'>돌아가기</a>
+{% endblock%}
+

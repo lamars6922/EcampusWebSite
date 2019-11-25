@@ -1,0 +1,13 @@
+{% extends "supporter/Lecture.html" %}
+
+{% block content %}
+    <form action = "{% url 'supporter:AddReport' user.pk lect.pk %}" method = 'get'>
+    {% csrf_token %}
+    {% for repo in reportList %}
+        <li><a href = "{% url 'supporter:ReportInfo' user.pk lect.pk repo.pk %}" method = 'get'>{{repo.report_tittle}}</a></li>    
+    {% endfor %}    
+    <input type='submit' value='새 과제 생성'/><br>
+    </form>
+    <a href = "{% url 'supporter:LecInfo' user.pk lect.pk %}" method = 'get'>돌아가기</a>
+{% endblock%}
+

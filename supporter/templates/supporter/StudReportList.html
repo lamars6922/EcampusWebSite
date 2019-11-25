@@ -1,0 +1,9 @@
+{% extends "supporter/LectureStud.html" %}
+
+{% block content %}
+    {% for repo in reportList %}
+        <li><a href = "{% url 'supporter:ReportInfoStud' user.pk lect.pk repo.pk %}" method = 'get'>{{repo.report_tittle}}</a></li>    
+    {% endfor %}    
+    <a href = "{% url 'supporter:StudLecInfo' user.pk lect.pk %}" method = 'get'>돌아가기</a>
+{% endblock%}
+

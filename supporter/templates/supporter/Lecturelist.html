@@ -1,0 +1,5 @@
+<h1>개설 강의 목록</h1>
+
+{% for fo in lectList %}
+    <a href = "{% url 'supporter:application' user_id fo.pk %}">{{fo.lec_name}}</a><br>
+{% endfor %}

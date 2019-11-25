@@ -1,0 +1,16 @@
+<h1>게시글 추가</h1>
+<form action = "{% url 'supporter:BoardList' user_id lect_id %}" enctype="multipart/form-data"  method = 'post' novalidate>
+    {% csrf_token %}
+    {% for fo in form %}
+        {% if fo.label %}
+            <br>{{fo.label|safe}}
+        {% endif %}
+        {{ fo }}
+        {{ fo.help_text|safe }}
+    {% endfor %}
+    <br><br><input type='submit' value='게시 완료' />
+</form>
+<form action = "{% url 'supporter:LecInfo' user_id lect_id %}" method = 'get'>
+    {% csrf_token %}
+<input type='submit' value='취소' />
+</form>

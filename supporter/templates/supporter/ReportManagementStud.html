@@ -1,0 +1,12 @@
+<form action = "{% url 'supporter:ReportManagStud' user.pk lect.pk report.pk %}" enctype="multipart/form-data" method = 'post'>
+    {% csrf_token %}
+    <h1>리포트 작성</h1>
+    {% for fo in form%}
+    {% if fo.label %}
+        <br>{{fo.label|safe}}
+    {% endif %}
+    {{ fo }}
+    {{ fo.help_text|safe }}
+    {% endfor %}
+    <br><br><input type='submit' value='작성 완료'/><br>
+</form> 

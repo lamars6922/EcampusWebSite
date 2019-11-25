@@ -1,0 +1,13 @@
+<h1>학생용 페이지</h1><hr>
+<form action = "{% url 'supporter:Check2' %}" method = 'post'>
+    {% csrf_token %}
+    {% for fo in form %}
+        {% if fo.label %}
+            <br>{{fo.label|safe}}
+        {% endif %}
+        {{ fo }}
+        {{ fo.help_text|safe }}
+    {% endfor %}
+    <input type='submit' value='로그인' /><br>
+    <a href = "{% url 'supporter:StudMemb' %}">학생용 회원가입</a>
+</form>

@@ -1,0 +1,15 @@
+<h1>교수용 회원가입</h1><hr>
+
+<form action = "{% url 'supporter:LoginProf' %}" method = 'post'>
+    {% csrf_token %}
+    {% for fo in form %}
+        {% if fo.label %}
+            <br>{{fo.label|safe}}
+        {% endif %}
+        {{ fo }}
+        {{ fo.help_text|safe }}
+    {% endfor %}
+    <br>
+    <br>
+    <input type='submit' value='회원가입' />
+</form>

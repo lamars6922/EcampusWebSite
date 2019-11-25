@@ -1,0 +1,13 @@
+{% extends "supporter/Lecture.html" %}
+
+{% block content %}
+    <form action = "{% url 'supporter:AddBoard' user.pk lect.pk %}" method = 'get'>
+    {% csrf_token %}
+    {% for boa in boardList %}
+        <li><a href = "{% url 'supporter:BoardInfo' user.pk lect.pk boa.pk %}" method = 'get'>{{boa.board_tittle}}</a></li>    
+    {% endfor %}    
+    <input type='submit' value='게시글 생성'/><br>
+    </form>
+    <a href = "{% url 'supporter:LecInfo' user.pk lect.pk %}" method = 'get'>돌아가기</a>
+{% endblock%}
+

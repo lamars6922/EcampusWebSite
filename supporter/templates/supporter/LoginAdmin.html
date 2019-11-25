@@ -1,0 +1,12 @@
+<h1>관리자용 페이지</h1><hr>
+<form action = "{% url 'supporter:Check3' %}" method = 'post'>
+    {% csrf_token %}
+    {% for fo in form %}
+        {% if fo.label %}
+            <br>{{fo.label|safe}}
+        {% endif %}
+        {{ fo }}
+        {{ fo.help_text|safe }}
+    {% endfor %}
+    <input type='submit' value='로그인' /><br>
+</form>

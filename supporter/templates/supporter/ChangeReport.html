@@ -1,0 +1,16 @@
+<h1>과제 수정</h1>
+<form action = "{% url 'supporter:ReportInfo' user.pk lect.pk report.pk %}" enctype="multipart/form-data" method = 'post'>
+    {% csrf_token %}
+    강의교수 : {{ lect.lec_prof }}<br>
+    강의명 : {{lect.lec_name}}<br>
+
+    {% for fo in form %}
+        {% if fo.label %}
+            <br>{{fo.label|safe}}
+        {% endif %}
+        {{ fo }}
+    {{ fo.help_text|safe }}
+{% endfor %}
+
+<br><input type='submit' value='변경완료' />
+</form>

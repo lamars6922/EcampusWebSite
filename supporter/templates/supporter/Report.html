@@ -1,0 +1,69 @@
+{% extends "supporter/Lecture.html" %}
+
+{% block content %}
+    <form action = "{% url 'supporter:ReportChange' user.pk lect.pk report.pk %}" method = 'get'>
+        제목 : {{ report.report_tittle }}<br>
+        내용 : {{ report.report_info }}<br>
+        <a href="{{ report.report_file.url }}">파일 : {{ report.report_file }}</a><br>
+        <input type='submit' value='리포트 정보 수정'/><br>
+    </form>
+
+    <form action = "{% url 'supporter:ReportDel' user.pk lect.pk report.pk %}" method = 'post'>
+        {% csrf_token %}
+        
+        <input type='submit' value='리포트 삭제'/><br>
+    </form>
+    <a href = "{% url 'supporter:ReportList' user.pk lect.pk %}" method = 'get'>돌아가기</a>
+    {% block ReportList%}
+    <hr>
+        <h2>과제제출 학생 목록</h2><br>
+        {% if report_studList %}
+        {% for report_stud in report_studList%}
+        <h5>이름 : {{report_stud.report_writer}}</h5>
+        <h5>제목 : {{report_stud.report_tittle}}</h5>
+        <h5>내용 : {{report_stud.report_info}}</h5>
+        <h5><a href="{{ report_stud.report_file.url }}">파일 : {{ report_stud.report_file }}</a></h5>
+            <hr>
+        {% endfor %}
+        {%else%}
+        <h3>====제출한 학생이 없습니다====</h3>
+        {% endif %}
+    {% endblock ReportList%}
+    {% block ReplyList %}
+    <br><hr>
+    {% if replyList %}
+        {% for rep in replyList %}
+            <form action = "{% url 'supporter:RepoReplyDel' user.pk lect.pk report.pk rep.pk %}" method = 'post'>
+                {% csrf_token %}
+                {% if rep.reply_stud %}
+                    <h5>작성자S : {{rep.reply_writer}}</h5>
+                {% else %}
+                    <h5>작성자P : {{rep.reply_writer}}</h5>
+                {% endif %}
+                    <h5>내용 : {{rep.reply_info}}</h5>
+                    
+                {% if rep.reply_file != "파일없음" %}
+                    <h5><a href="{{ rep.reply_file.url }}">파일 : {{ rep.reply_file }}</a></h5>
+                {% endif %}
+                <input type='submit' value='댓글 삭제'/><br>
+            </form>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <hr><h2>댓글이 없습니다.</h2><hr>
+    {% endif %}
+        <form action = "{% url 'supporter:AddRepoReply' user.pk lect.pk report.pk %}" enctype="multipart/form-data" method = 'post'>
+            {% csrf_token %}
+            <h3>댓글 달기</h3>         
+            {% if user.stud_id %}
+                작성자S : {{user.stud_name}} [{{form.reply_stud}}, {{form.reply_report}}]<br>
+            {% else %}
+                작성자P : {{user.prof_name}} [{{form.reply_prof}}, {{form.reply_report}}]<br>
+            {% endif %}
+            댓글 내용<br>{{form.reply_info}}<br>
+            파일 첨부 :  {{form.reply_file}}<br>
+            <input type='submit' value='댓글 달기'/><br>
+        </form> 
+
+    {% endblock %}
+{% endblock %}

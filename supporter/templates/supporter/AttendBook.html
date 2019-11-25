@@ -1,0 +1,17 @@
+<h1>출석부</h1>
+<h3>교수님 : {{user.prof_name}}</h3>
+<h3>과목 : {{lect.lec_name}}</h3>
+<table border = "1">
+    <tbody>
+        <tr><td>학번</td><td>이름</td><td>전화번호</td><td>1주차</td><td>2주차</td><td>3주차</td><td>4주차</td><td>5주차</td>
+            <td>6주차</td><td>7주차</td><td>8주차</td><td>9주차</td><td>10주차</td>
+            <td>11주차</td><td>12주차</td><td>13주차</td><td>14주차</td><td>15주차</td></tr><br>
+        {% for student in attendList %}
+        <tr><td>{{student.att_stud.stud_num}}</td><td>{{student.att_stud.stud_name}}</td><td>{{student.att_stud.stud_Phone}}</td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td></tr><br>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<a href = "{% url 'supporter:LecInfo' user.pk lect.pk %}" method = 'get'>돌아가기</a>

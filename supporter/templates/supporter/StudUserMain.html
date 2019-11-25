@@ -1,0 +1,21 @@
+<form action = "{% url 'supporter:StudInfo' user.pk %}" method = 'get'>
+    {% csrf_token %}
+    <h1>{{user.stud_name}}학생님! 안녕하세요</h1>
+    <h4>아이디 : {{user.stud_id}}</h4>
+    <h4>학번 : {{user.stud_num}}</h4>
+    <h4>전화번호 : {{user.stud_Phone}}</h4>
+<a href = "{% url 'supporter:LoginStud' %}">로그아웃</a>
+    
+    <input type='submit' value='개인정보수정' /> 
+</form>
+
+<hr><hr>
+<h2>현재 수강중인 강의 목록</h2> 
+<form action = "{% url 'supporter:leclist' user.pk %}" method = 'get'>
+    {% csrf_token %}
+    {% for att in addList %}
+        <li><a href = "{% url 'supporter:StudLecInfo' user.pk att.att_lect.pk %}" method = 'get'>{{att.att_lect}}</a></li>
+    {% endfor %}
+    <input type='submit' value='개설강의목록' />
+</form>
+<hr>

@@ -1,0 +1,27 @@
+{% if user.pk != 1%}
+    <h1>{{user.prof_name}}교수님! 안녕하세요</h1>
+    <h4>아이디 : {{user.prof_id}}</h4>
+    <h4>교수번호 : {{user.prof_num}}</h4>
+    <h4>전화번호 : {{user.prof_Phone}}</h4>
+
+<form action = "{% url 'supporter:ProfInfo' user.pk %}" method = 'get'>
+    {% csrf_token %}
+    <input type='submit' value='개인정보수정' /> 
+    <a href = "{% url 'supporter:LoginProf' %}">로그아웃</a>
+</form>
+{% else %}
+    <h1>{{user.prof_name}}님! 안녕하세요</h1>
+    <h2>지금 보시는 페이지는 관리자 전용 페이지입니다.</h2>
+    <a href = "{% url 'supporter:Login' %}">로그아웃</a>
+{% endif %}
+
+<hr><hr>
+<h2>현재 강의중인 강의 목록</h2>
+<hr>
+<form action = "{% url 'supporter:AddLecP' user.pk %}" method = 'post'>
+    {% csrf_token %}
+    {% for lec in lectList %}
+        <li><a href = "{% url 'supporter:LecInfo' user.pk lec.pk %}" method = 'get'>{{lec.lec_name}}</a></li>
+    {% endfor %}    
+<input type='submit' value='새로운 강의 개설' />
+</form>
